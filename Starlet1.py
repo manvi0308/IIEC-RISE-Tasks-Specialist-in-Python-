@@ -1,46 +1,64 @@
-# Problem statement: Convert the OS based program into a menu driven program, which will execute the required user query when user will give the input as a text
-#Importing required modules
-import os    #Required for executing system commands in python
-import  pyttsx3   #Its a python text to speech library
+import os
+import pyttsx3
+import datetime
+import webbrowser
+import wikipedia
 
-engine = pyttsx3.init()   #initializing an object of engine
+#One time initialization
+engine = pyttsx3.init('sapi5')
+engine.setProperty('rate', 150 )    # Speed percent (can go over 100)
+engine.setProperty('volume', 1.0)  # Volume 0-1
 
-print('Hello There!!')
-engine.speak('Hello I am Starlet!! Your personal assistant , I will help you in opening programs by a single number!!')
-engine.speak("Welcome to my tools")
 
-engine.speak('Let me show you what i can do for you!!')
-print()
-print('Press 1:     For opening chrome browser')
-print('Press 2:     To open notepad')
-print('Press3:      To open media player')
-print('press 4:     To open Internet Explorer')
-print('press 5:     To open Sublime Text3')
-print('press 6:     To open VLC')
+#Greetings function
 
-engine.speak('Go ahead type your choice!! Only the number!')
-print("Enter your Choice  :",end='')
-choice  =  input()
-print("You entered  " + choice)
+def greetUser():
+    hour = int(datetime.datetime.now().hour)
+    if hour >= 0 and hour < 12:
+        engine.say("Wishing you a bright morning")
 
-# For switching between various choices entered by user i have used if - elif -else clause
-if int(choice)==1:
-	os.system("chrome")   #Required command for chrome
-elif int(choice)==2:
-	os.system("notepad")  #Required command for notepad
-elif int(choice)==3:
-	os.system("wmplayer")   #Required command for windows media player
-elif int(choice)==4:
-	os.system("explorer")  #Required command for internet explorer
-elif int(choice)==5:
-	os.system("sublime_text")  #Required command for sublime text
-elif int(choice)==6:
-                    os.system("vlc")   #Required command for vlc player
-else:
-engine.speak("I currently don't support your choice!!Don't worry i will be trained super soon")
+    elif hour >= 12 and hour < 18:
+        engine.say("I hope you are having a good day!!Good Afternoon Ma'am!")
 
-engine.runAndWait()
-engine.stop()
+    else:
+        engine.say("Hope that you had a really productive day , GOOOOOD Evening ")
+#Main code begins here
+greetUser()
+engine.say('Hello I am Starlet , your virtual assistant !!Welcome to my tools')
 
-#So Far So good
-#Soon our voice assistant will have many more features where we don't have to type even we will just speak and Starlet will do for us
+while (1):
+	
+
+	engine.say('Enter 1 for chrome:')
+	engine.say('Enter 2 for wmplayer:')
+	engine.say('Enter 3 for word:')
+	engine.say('Enter 4 for powerpoint:')
+    	engine.say('Enter 5 for Notepad++')
+    	engine.say('Enter 6 for Youtube:')
+	
+	
+	engine.say('ENTER YOUR CHOICE')
+	
+	print('Enter your choice')
+	
+	#Taking user input for choice
+	choice = input()
+	if int(choice)==1:
+		engine.say('Opening Chrome for you!!')
+		os.system('chrome')
+	elif int(choice)== 2:
+		engine.say('Opening Windows media player')
+		os.system('wmplayer')
+	elif int(choice) == 3:
+		engine.say('Opening word for you!!')
+		os.system('WINWORD')
+	elif int(choice) == 4:
+		engine.say('Opening Powerpoint for you')
+		os.system('POWERPNT')
+    	elif int(choice) == 5:
+        engine.say('Opening Notepad++ for you')
+        os.system('notepad++')
+    	else:
+        engine.say('Opening Youtube for you')
+        webbrowser.open(https://www.youtube.com/, new=0, autoraise=True)
+	engine.runAndWait()
